@@ -1,0 +1,5 @@
+AttributeError: 'FreeTypeFont' object has no attribute 'getsize'
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 2/2 00:00
+                   all         30        309      0.737      0.783      0.804      0.524
+                 epith         30         58      0.772      0.845      0.885      0.741
+               rbc/wbc         30        251      0.702      0.721      0.723      0.306

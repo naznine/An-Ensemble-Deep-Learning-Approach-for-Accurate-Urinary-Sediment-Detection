@@ -1,0 +1,7 @@
+names:
+  0: epith
+  1: rbc/wbc
+path: C:/Mansura/UTI-Revision2/ExternalValidation/DATA-UTI-LR/Data
+test: test
+train: train
+val: val

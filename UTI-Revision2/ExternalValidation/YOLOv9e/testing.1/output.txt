@@ -1,0 +1,22 @@
+# Test and generate predictions
+
+!python val_dual.py --weights "C:/Mansura/UTI-Revision2/ExternalValidation/YOLOv9e/training.1/weights/best.pt" \
+--data data.yaml \
+--save-txt \
+--save-conf \
+--imgsz {image_size} \
+--batch {batch_size} \
+--conf 0.01 \
+--iou {iou_threshold} \
+--device 0 \
+--project {result_dir} \
+--name {"testing.1"} \
+--task test \
+--exist-ok
+
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 107/107 00:21
+                   all        852       4853      0.871      0.882       0.92       0.59
+                 epith        852       1049      0.807      0.872      0.903      0.597
+               rbc/wbc        852       3804      0.934      0.891      0.938      0.583
+Speed: 0.1ms pre-process, 20.3ms inference, 0.6ms NMS per image at shape (8, 3, 640, 640)
