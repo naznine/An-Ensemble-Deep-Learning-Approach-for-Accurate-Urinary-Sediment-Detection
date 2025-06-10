@@ -1,0 +1,95 @@
+# @title Model training config
+dataset_path = "C:/Mansura/UTI/data/DATA-UTI-LR/Data"           # @param {type:"string"}
+experiment_name = "training.1"              # @param {type:"string"}
+model_name = "yolov5s"       # @param [ "yolov9c", "yolov9e", "yolov8n", "yolov8s", "yolov8m", "yolov8l", "yolov8x", "rtdetr-l", "rtdetr-resnet101", "rtdetr-resnet50", "rtdetr-x", "yolov6n", "yolov6s", "yolov6m", "yolov6l", "yolov6x", "yolov5n", "yolov5s", "yolov5m", "yolov5l", "yolov5x"]
+result_dir = "C:/Mansura/UTI/Version-Final/YOLOv5s" # @param {type:"string"}
+# dataset_dir = "" # @param {type:"string"}
+num_epochs = 100        # @param {type:"integer"}
+epoch_patience = 50     # @param{type: "integer"}
+image_size = 640        # @param{type: "integer"}
+optimizer = "SGD"      # @param ["auto", "AdamW", "Adam", "SGD", "NAdam", "RAdam", "RMSProp"]
+learning_rate = 0.001    # @param {type: "number"}
+batch_size = 8         # @param {type: "integer"}
+pretrained = True       # @param {type:"boolean"}
+exist_ok = False        # @param {type:"boolean"}
+
+if model_name.startswith("rtdetr"):
+    model = RTDETR(f"{model_name}.yaml")
+else:
+    model = YOLO(f"{model_name}.yaml")  # build a new model from YAML
+
+
+New https://pypi.org/project/ultralytics/8.2.28 available  Update with 'pip install -U ultralytics'
+Ultralytics YOLOv8.2.26  Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+engine\trainer: task=detect, mode=train, model=yolov5s.yaml, data=C:/Mansura/UTI/data.yaml, epochs=100, time=None, patience=50, batch=8, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=C:/Mansura/UTI/Version-Final/YOLOv5s, name=training.1, exist_ok=False, pretrained=True, optimizer=SGD, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.001, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=C:\Mansura\UTI\Version-Final\YOLOv5s\training.1
+Overriding model.yaml nc=80 with nc=7
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1      3520  ultralytics.nn.modules.conv.Conv             [3, 32, 6, 2, 2]              
+  1                  -1  1     18560  ultralytics.nn.modules.conv.Conv             [32, 64, 3, 2]                
+  2                  -1  1     18816  ultralytics.nn.modules.block.C3              [64, 64, 1]                   
+  3                  -1  1     73984  ultralytics.nn.modules.conv.Conv             [64, 128, 3, 2]               
+  4                  -1  2    115712  ultralytics.nn.modules.block.C3              [128, 128, 2]                 
+  5                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  6                  -1  3    625152  ultralytics.nn.modules.block.C3              [256, 256, 3]                 
+  7                  -1  1   1180672  ultralytics.nn.modules.conv.Conv             [256, 512, 3, 2]              
+  8                  -1  1   1182720  ultralytics.nn.modules.block.C3              [512, 512, 1]                 
+  9                  -1  1    656896  ultralytics.nn.modules.block.SPPF            [512, 512, 5]                 
+ 10                  -1  1    131584  ultralytics.nn.modules.conv.Conv             [512, 256, 1, 1]              
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 13                  -1  1    361984  ultralytics.nn.modules.block.C3              [512, 256, 1, False]          
+ 14                  -1  1     33024  ultralytics.nn.modules.conv.Conv             [256, 128, 1, 1]              
+ 15                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 16             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 17                  -1  1     90880  ultralytics.nn.modules.block.C3              [256, 128, 1, False]          
+ 18                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+ 19            [-1, 14]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 20                  -1  1    296448  ultralytics.nn.modules.block.C3              [256, 256, 1, False]          
+ 21                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]              
+ 22            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 23                  -1  1   1182720  ultralytics.nn.modules.block.C3              [512, 512, 1, False]          
+ 24        [17, 20, 23]  1   2118757  ultralytics.nn.modules.head.Detect           [7, [128, 256, 512]]          
+YOLOv5s summary: 262 layers, 9124901 parameters, 9124885 gradients, 24.1 GFLOPs
+
+TensorBoard: Start with 'tensorboard --logdir C:\Mansura\UTI\Version-Final\YOLOv5s\training.1', view at http://localhost:6006/
+Freezing layer 'model.24.dfl.conv.weight'
+AMP: running Automatic Mixed Precision (AMP) checks with YOLOv8n...
+AMP: checks passed 
+train: Scanning C:\Mansura\UTI\data\DATA-UTI-LR\Data\train\labels.cache... 4256 images, 0 backgrounds, 0 corrupt: 100%|██████████| 4256/4256 [00:00<?, ?it/s]
+albumentations: Blur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01), CLAHE(p=0.01, clip_limit=(1, 4.0), tile_grid_size=(8, 8))
+
+val: Scanning C:\Mansura\UTI\data\DATA-UTI-LR\Data\val\labels.cache... 268 images, 0 backgrounds, 0 corrupt: 100%|██████████| 268/268 [00:00<?, ?it/s]
+Plotting labels to C:\Mansura\UTI\Version-Final\YOLOv5s\training.1\labels.jpg... 
+optimizer: SGD(lr=0.001, momentum=0.937) with parameter groups 69 weight(decay=0.0), 76 weight(decay=0.0005), 75 bias(decay=0.0)
+TensorBoard: model graph visualization added 
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to C:\Mansura\UTI\Version-Final\YOLOv5s\training.1
+Starting training for 100 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      1/100      3.82G      5.153      5.885      3.981         57        640:  48%|████▊     | 253/532 [00:16<00:17, 15.82it/s]
+
+
+100 epochs completed in 0.904 hours.
+Optimizer stripped from C:\Mansura\UTI\Version-Final\YOLOv5s\training.1\weights\last.pt, 18.5MB
+Optimizer stripped from C:\Mansura\UTI\Version-Final\YOLOv5s\training.1\weights\best.pt, 18.5MB
+
+Validating C:\Mansura\UTI\Version-Final\YOLOv5s\training.1\weights\best.pt...
+Ultralytics YOLOv8.2.26  Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+YOLOv5s summary (fused): 193 layers, 9114245 parameters, 0 gradients, 23.8 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 17/17 [00:01<00:00, 12.80it/s]
+                   all        268       1692      0.775      0.767      0.825       0.49
+                  cast         80        194      0.655      0.528      0.652      0.338
+                 cryst         42         84      0.773      0.568      0.756      0.494
+                 epith         75        418      0.798      0.852      0.893      0.593
+                epithn         23         35      0.814      0.749      0.757      0.348
+                 eryth         48        599      0.937      0.938      0.974      0.609
+                 leuko         54        261      0.705       0.92      0.899      0.542
+                mycete         39        101      0.744      0.812      0.846      0.506
+Speed: 0.1ms preprocess, 1.3ms inference, 0.0ms loss, 1.0ms postprocess per image
+
+
+
+
