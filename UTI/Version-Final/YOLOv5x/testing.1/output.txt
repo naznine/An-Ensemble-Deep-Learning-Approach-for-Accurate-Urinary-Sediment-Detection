@@ -1,0 +1,31 @@
+test_config = {
+'data' : "C:/Mansura/UTI/data.yaml",  #path to dataset yaml file, i.e coco.yaml, data.yaml
+'save': True,
+'save_txt' : True, #save results as .txt file
+'save_conf' : True, #save results with confidence scores
+'save_json' : True, #save results to JSON file
+'save_hybrid' : False, #save hybrid version of labels (labels + additional predictions)
+'conf' : 0.01, #object confidence threshold for detection (default 0.001 for val)
+'iou' : 0.5,  #intersection over union (IoU) threshold for NMS
+'max_det' : 300, #maximum number of detections per image
+'half' : True, #use half precision (FP16)
+'dnn' : False, #use OpenCV DNN for ONNX inference
+'plots' : True, #generate P-R plots and Confusion Matrix
+'rect' : False, #rectangular evaluation
+'split' : 'test', #choose split to run evaluation on
+'name' : 'testing.1'
+}
+
+Ultralytics YOLOv8.2.39  Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+YOLOv5x summary (fused): 358 layers, 97159349 parameters, 0 gradients, 246.0 GFLOPs
+val: Scanning C:\Mansura\UTI\data\DATA-UTI-LR\Data\test\labels.cache... 852 images, 0 backgrounds, 0 corrupt: 100%|██████████| 852/852 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 54/54 [00:12<00:00,  4.23it/s]
+                   all        852       5948      0.806      0.818      0.852       0.52
+                  cast        220        545      0.721      0.642      0.732      0.429
+                 cryst        161        317      0.812      0.765      0.838      0.529
+                 epith        218        972      0.765       0.86      0.867      0.574
+                epithn         58         77      0.798      0.818      0.851      0.441
+                 eryth        156       3008      0.894       0.88      0.902       0.56
+                 leuko        232        796      0.816      0.933      0.916      0.591
+                mycete         94        233      0.838      0.824       0.86      0.519
+Speed: 0.1ms preprocess, 7.8ms inference, 0.0ms loss, 0.6ms postprocess per image
