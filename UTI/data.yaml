@@ -1,0 +1,12 @@
+names:
+  0: cast
+  1: cryst
+  2: epith
+  3: epithn
+  4: eryth
+  5: leuko
+  6: mycete
+path: C:/Mansura/UTI/data/DATA-UTI-LR/Data
+test: test
+train: train
+val: val
