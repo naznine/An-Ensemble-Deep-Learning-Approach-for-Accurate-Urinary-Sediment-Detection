@@ -1,0 +1,13 @@
+Using yolov9 pipeline
+
+import urllib.request
+
+# Download yolov9-c.pt
+url_gelan_c = "https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-c.pt"
+file_name_gelan_c = "yolov9-c.pt"
+urllib.request.urlretrieve(url_gelan_c, file_name_gelan_c)
+
+# Download yolov9e-e.pt
+url_gelan_e = "https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-e.pt"
+file_name_gelan_e = "yolov9-e.pt"
+urllib.request.urlretrieve(url_gelan_e, file_name_gelan_e)

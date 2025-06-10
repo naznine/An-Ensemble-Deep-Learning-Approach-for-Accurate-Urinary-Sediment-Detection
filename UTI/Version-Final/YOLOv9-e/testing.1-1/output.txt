@@ -1,0 +1,33 @@
+# Test and generate predictions
+
+!python val_dual.py --weights {result_dir}/{experiment_name}/weights/best.pt \
+--data data.yaml \
+--save-txt \
+--save-conf \
+--imgsz {image_size} \
+--batch {batch_size} \
+--conf 0.1 \
+--iou {iou_threshold} \
+--device 0 \
+--project {result_dir} \
+--name {"testing.1-1"} \
+--task test \
+--exist-ok
+
+val_dual: data=data.yaml, weights=['C:/Mansura/UTI/Version-7/YOLOv9-e/training.1/weights/best.pt'], batch_size=8, imgsz=640, conf_thres=0.1, iou_thres=0.5, max_det=300, task=test, device=0, workers=8, single_cls=False, augment=False, verbose=False, save_txt=True, save_hybrid=False, save_conf=True, save_json=False, project=C:/Mansura/UTI/Version-7/YOLOv9-e, name=testing.1-1, exist_ok=True, half=False, dnn=False, min_items=0
+WARNING  confidence threshold 0.1 > 0.001 produces invalid results
+YOLO  v0.1-89-g93f1a28 Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+
+Fusing layers... 
+yolov9-e summary: 839 layers, 68557066 parameters, 0 gradients, 240.7 GFLOPs
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 107/107 00:22
+                   all        852       5948      0.885      0.881      0.922      0.623
+                  cast        852        545      0.793      0.771      0.843      0.568
+                 cryst        852        317      0.894      0.875      0.933      0.645
+                 epith        852        972      0.851      0.903      0.926      0.656
+                epithn        852         77      0.869      0.909      0.908      0.525
+                 eryth        852       3008      0.955      0.898      0.943      0.632
+                 leuko        852        796      0.912      0.943      0.969      0.673
+                mycete        852        233      0.923       0.87      0.934      0.663
+Speed: 0.1ms pre-process, 20.2ms inference, 0.7ms NMS per image at shape (8, 3, 640, 640)

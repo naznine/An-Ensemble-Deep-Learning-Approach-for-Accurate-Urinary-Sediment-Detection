@@ -1,0 +1,107 @@
+(applying only mosaic)
+
+# @title Model training config
+dataset_path = "C:/Mansura/UTI/data"           # @param {type:"string"}
+experiment_name = "training.1"              # @param {type:"string"}
+model_name = "yolov9-e"  # @param ["gelan-c", "gelan-e"]
+result_dir = "C:/Mansura/UTI/Version-7/YOLOv9-e" # @param {type:"string"}
+num_epochs = 100        # @param {type:"integer"}
+epoch_patience = 100     # @param{type: "integer"}
+optimizer = "SGD"       # @param ["SGD", "Adam", "AdamW", "LION"]
+image_size = 640        # @param{type: "integer"}]
+#learning_rate = 0.01    # @param {type: "number"}
+batch_size = 8         # @param {type: "integer"}
+conf_threshold = 0.001  # @param {type: "number"}
+iou_threshold = 0.5     # @param {type: "number"}
+pretrained = True       # @param {type:"boolean"}
+
+weight_name = f"{model_name}.pt"
+cfg_name = f"models/detect/{model_name}.yaml"
+
+
+train_dual: weights=yolov9-e.pt, cfg=models/detect/yolov9-e.yaml, data=data.yaml, hyp=hyp.scratch-high.yaml, epochs=100, batch_size=8, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, noplots=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=C:/Mansura/UTI/Version-7/YOLOv9-e, name=training.1, exist_ok=True, quad=False, cos_lr=False, flat_cos_lr=False, fixed_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, seed=0, local_rank=-1, min_items=0, close_mosaic=0, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+YOLO  v0.1-89-g93f1a28 Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+
+hyperparameters: lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, cls_pw=1.0, obj=0.7, obj_pw=1.0, dfl=1.5, iou_t=0.2, anchor_t=5.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.9, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.15, copy_paste=0.3
+ClearML: run 'pip install clearml' to automatically track, visualize and remotely train YOLO  in ClearML
+Comet: run 'pip install comet_ml' to automatically track and visualize YOLO  runs in Comet
+TensorBoard: Start with 'tensorboard --logdir C:\Mansura\UTI\Version-7\YOLOv9-e', view at http://localhost:6006/
+Overriding model.yaml nc=80 with nc=7
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1         0  models.common.Silence                   []                            
+  1                -1  1      1856  models.common.Conv                      [3, 64, 3, 2]                 
+  2                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  3                -1  1    252160  models.common.RepNCSPELAN4              [128, 256, 128, 64, 2]        
+  4                -1  1    164352  models.common.ADown                     [256, 256]                    
+  5                -1  1   1004032  models.common.RepNCSPELAN4              [256, 512, 256, 128, 2]       
+  6                -1  1    656384  models.common.ADown                     [512, 512]                    
+  7                -1  1   4006912  models.common.RepNCSPELAN4              [512, 1024, 512, 256, 2]      
+  8                -1  1   2623488  models.common.ADown                     [1024, 1024]                  
+  9                -1  1   4269056  models.common.RepNCSPELAN4              [1024, 1024, 512, 256, 2]     
+ 10                 1  1      4160  models.common.CBLinear                  [64, [64]]                    
+ 11                 3  1     49344  models.common.CBLinear                  [256, [64, 128]]              
+ 12                 5  1    229824  models.common.CBLinear                  [512, [64, 128, 256]]         
+ 13                 7  1    984000  models.common.CBLinear                  [1024, [64, 128, 256, 512]]   
+ 14                 9  1   2033600  models.common.CBLinear                  [1024, [64, 128, 256, 512, 1024]]
+ 15                 0  1      1856  models.common.Conv                      [3, 64, 3, 2]                 
+ 16[10, 11, 12, 13, 14, -1]  1         0  models.common.CBFuse                    [[0, 0, 0, 0, 0]]             
+ 17                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+ 18[11, 12, 13, 14, -1]  1         0  models.common.CBFuse                    [[1, 1, 1, 1]]                
+ 19                -1  1    252160  models.common.RepNCSPELAN4              [128, 256, 128, 64, 2]        
+ 20                -1  1    164352  models.common.ADown                     [256, 256]                    
+ 21  [12, 13, 14, -1]  1         0  models.common.CBFuse                    [[2, 2, 2]]                   
+ 22                -1  1   1004032  models.common.RepNCSPELAN4              [256, 512, 256, 128, 2]       
+ 23                -1  1    656384  models.common.ADown                     [512, 512]                    
+ 24      [13, 14, -1]  1         0  models.common.CBFuse                    [[3, 3]]                      
+ 25                -1  1   4006912  models.common.RepNCSPELAN4              [512, 1024, 512, 256, 2]      
+ 26                -1  1   2623488  models.common.ADown                     [1024, 1024]                  
+ 27          [14, -1]  1         0  models.common.CBFuse                    [[4]]                         
+ 28                -1  1   4269056  models.common.RepNCSPELAN4              [1024, 1024, 512, 256, 2]     
+ 29                 9  1    787968  models.common.SPPELAN                   [1024, 512, 256]              
+ 30                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 31           [-1, 7]  1         0  models.common.Concat                    [1]                           
+ 32                -1  1   4005888  models.common.RepNCSPELAN4              [1536, 512, 512, 256, 2]      
+ 33                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 34           [-1, 5]  1         0  models.common.Concat                    [1]                           
+ 35                -1  1   1069056  models.common.RepNCSPELAN4              [1024, 256, 256, 128, 2]      
+ 36                28  1    787968  models.common.SPPELAN                   [1024, 512, 256]              
+ 37                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 38          [-1, 25]  1         0  models.common.Concat                    [1]                           
+ 39                -1  1   4005888  models.common.RepNCSPELAN4              [1536, 512, 512, 256, 2]      
+ 40                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 41          [-1, 22]  1         0  models.common.Concat                    [1]                           
+ 42                -1  1   1069056  models.common.RepNCSPELAN4              [1024, 256, 256, 128, 2]      
+ 43                -1  1    164352  models.common.ADown                     [256, 256]                    
+ 44          [-1, 39]  1         0  models.common.Concat                    [1]                           
+ 45                -1  1   3612672  models.common.RepNCSPELAN4              [768, 512, 512, 256, 2]       
+ 46                -1  1    656384  models.common.ADown                     [512, 512]                    
+ 47          [-1, 36]  1         0  models.common.Concat                    [1]                           
+ 48                -1  1  12860416  models.common.RepNCSPELAN4              [1024, 512, 1024, 512, 2]     
+ 49[35, 32, 29, 42, 45, 48]  1  10992074  models.yolo.DualDDetect                 [7, [256, 512, 512, 256, 512, 512]]
+yolov9-e summary: 1475 layers, 69417098 parameters, 69417066 gradients, 244.9 GFLOPs
+
+Transferred 2160/2172 items from yolov9-e.pt
+AMP: checks passed 
+optimizer: SGD(lr=0.01) with parameter groups 356 weight(decay=0.0), 375 weight(decay=0.0005), 373 bias
+albumentations: Blur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01), CLAHE(p=0.01, clip_limit=(1, 4.0), tile_grid_size=(8, 8))
+train: Scanning C:\Mansura\UTI\data\train\labels... 4256 images, 0 backgrounds, 0 corrupt: 100%|██████████| 4256/4256 00:04
+train: WARNING  Cache directory C:\Mansura\UTI\data\train is not writeable: [WinError 183] Cannot create a file when that file already exists: 'C:\\Mansura\\UTI\\data\\train\\labels.cache.npy' -> 'C:\\Mansura\\UTI\\data\\train\\labels.cache'
+val: Scanning C:\Mansura\UTI\data\test\labels... 268 images, 0 backgrounds, 0 corrupt: 100%|██████████| 268/268 00:04
+val: WARNING  Cache directory C:\Mansura\UTI\data\test is not writeable: [WinError 183] Cannot create a file when that file already exists: 'C:\\Mansura\\UTI\\data\\test\\labels.cache.npy' -> 'C:\\Mansura\\UTI\\data\\test\\labels.cache'
+Plotting labels to C:\Mansura\UTI\Version-7\YOLOv9-e\training.1\labels.jpg... 
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to C:\Mansura\UTI\Version-7\YOLOv9-e\training.1
+Starting training for 100 epochs...
+
+yolov9-e summary: 839 layers, 68557066 parameters, 0 gradients, 240.7 GFLOPs
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:04
+                   all        268       1692      0.867      0.861      0.917      0.607
+                  cast        268        194      0.744      0.727      0.848       0.51
+                 cryst        268         84      0.936      0.865      0.954      0.683
+                 epith        268        418      0.865        0.9      0.946      0.674
+                epithn        268         35      0.785      0.743      0.822      0.419
+                 eryth        268        599       0.96      0.952       0.98      0.684
+                 leuko        268        261      0.869       0.92      0.935       0.62
+                mycete        268        101      0.912      0.921      0.936       0.66
