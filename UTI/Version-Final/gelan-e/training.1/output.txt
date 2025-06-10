@@ -1,0 +1,37 @@
+# @title Model training config
+dataset_path = "C:/Mansura/UTI/data"           # @param {type:"string"}
+experiment_name = "training.1"              # @param {type:"string"}
+model_name = "gelan-e"  # @param ["gelan-c", "gelan-e"]
+result_dir = "C:/Mansura/UTI/Version-7/gelan-e" # @param {type:"string"}
+num_epochs = 100        # @param {type:"integer"}
+epoch_patience = 20     # @param{type: "integer"}
+optimizer = "SGD"       # @param ["SGD", "Adam", "AdamW", "LION"]
+image_size = 640        # @param{type: "integer"}]
+#learning_rate = 0.01    # @param {type: "number"}
+batch_size = 8         # @param {type: "integer"}
+conf_threshold = 0.001  # @param {type: "number"}
+iou_threshold = 0.5     # @param {type: "number"}
+pretrained = True       # @param {type:"boolean"}
+
+weight_name = f"{model_name}.pt"
+cfg_name = f"models/detect/{model_name}.yaml"
+
+train: weights=gelan-e.pt, cfg=models/detect/gelan-e.yaml, data=data.yaml, hyp=hyp.scratch-high.yaml, epochs=100, batch_size=8, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, noplots=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=C:/Mansura/UTI/Version-7/gelan-e, name=training.1, exist_ok=True, quad=False, cos_lr=False, flat_cos_lr=False, fixed_lr=False, label_smoothing=0.0, patience=20, freeze=[0], save_period=-1, seed=0, local_rank=-1, min_items=0, close_mosaic=0, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+YOLO  v0.1-89-g93f1a28 Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+
+hyperparameters: lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, cls_pw=1.0, obj=0.7, obj_pw=1.0, dfl=1.5, iou_t=0.2, anchor_t=5.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.9, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.15, copy_paste=0.3
+ClearML: run 'pip install clearml' to automatically track, visualize and remotely train YOLO  in ClearML
+Comet: run 'pip install comet_ml' to automatically track and visualize YOLO  runs in Comet
+TensorBoard: Start with 'tensorboard --logdir C:\Mansura\UTI\Version-7\gelan-e', view at http://localhost:6006/
+Overriding model.yaml nc=80 with nc=7
+
+gelan-e summary: 690 layers, 57289637 parameters, 0 gradients, 188.6 GFLOPs
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:04
+                   all        268       1692      0.869      0.878      0.924      0.607
+                  cast        268        194       0.75      0.757      0.817      0.505
+                 cryst        268         84      0.889      0.857      0.961       0.67
+                 epith        268        418      0.844      0.909      0.949      0.672
+                epithn        268         35      0.874      0.829      0.871      0.429
+                 eryth        268        599       0.95      0.959      0.979      0.684
+                 leuko        268        261      0.847      0.933       0.93      0.625
+                mycete        268        101      0.928        0.9      0.957      0.662
