@@ -1,0 +1,15 @@
+Ultralytics YOLOv8.2.39  Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+YOLOv5m summary (fused): 248 layers, 25049269 parameters, 0 gradients, 64.0 GFLOPs
+val: Scanning C:\Mansura\UTI\data\DATA-UTI-LR\Data\test\labels.cache... 852 images, 0 backgrounds, 0 corrupt: 100%|██████████| 852/852 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 54/54 [00:09<00:00,  5.86it/s]
+                   all        852       5948      0.798      0.808       0.85      0.513
+                  cast        220        545      0.702      0.632      0.713      0.392
+                 cryst        161        317       0.82      0.757      0.833      0.529
+                 epith        218        972      0.758       0.87      0.874       0.57
+                epithn         58         77      0.853      0.829      0.878      0.455
+                 eryth        156       3008      0.882      0.879      0.899      0.559
+                 leuko        232        796      0.787      0.929      0.921      0.586
+                mycete         94        233       0.78       0.76      0.831        0.5
+Speed: 0.1ms preprocess, 3.0ms inference, 0.0ms loss, 0.6ms postprocess per image
+Saving runs\detect\testing.1\predictions.json...
+Results saved to runs\detect\testing.1
