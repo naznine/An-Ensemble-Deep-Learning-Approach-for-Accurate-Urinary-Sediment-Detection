@@ -1,0 +1,34 @@
+# Test and generate predictions
+
+!python val.py --weights {result_dir}/{experiment_name}/weights/best.pt \
+--data data.yaml \
+--save-txt \
+--save-conf \
+--imgsz {image_size} \
+--batch {batch_size} \
+--conf 0.1 \
+--iou {iou_threshold} \
+--device 0 \
+--project {result_dir} \
+--name {"testing.1-1"} \
+--task test \
+--exist-ok
+
+val: data=data.yaml, weights=['C:/Mansura/UTI/Version-7/gelan-c/training.1/weights/best.pt'], batch_size=8, imgsz=640, conf_thres=0.1, iou_thres=0.5, max_det=300, task=test, device=0, workers=8, single_cls=False, augment=False, verbose=False, save_txt=True, save_hybrid=False, save_conf=True, save_json=False, project=C:/Mansura/UTI/Version-7/gelan-c, name=testing.1-1, exist_ok=True, half=False, dnn=False, min_items=0
+WARNING  confidence threshold 0.1 > 0.001 produces invalid results
+YOLO  v0.1-89-g93f1a28 Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+
+Fusing layers... 
+gelan-c summary: 387 layers, 25232485 parameters, 0 gradients, 101.8 GFLOPs
+
+
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 107/107 00:12
+                   all        852       5948      0.867      0.879      0.913      0.617
+                  cast        852        545      0.771       0.76       0.82      0.544
+                 cryst        852        317      0.865       0.89      0.924      0.639
+                 epith        852        972      0.828      0.898       0.92      0.647
+                epithn        852         77      0.869      0.864      0.881      0.527
+                 eryth        852       3008      0.944      0.898      0.938      0.631
+                 leuko        852        796      0.883      0.955      0.967      0.663
+                mycete        852        233      0.912      0.888      0.942      0.665
+Speed: 0.1ms pre-process, 8.2ms inference, 0.7ms NMS per image at shape (8, 3, 640, 640)

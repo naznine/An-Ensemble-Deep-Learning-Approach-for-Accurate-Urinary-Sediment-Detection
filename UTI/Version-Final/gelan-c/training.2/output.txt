@@ -1,0 +1,127 @@
+train: weights=gelan-c.pt, cfg=models/detect/gelan-c.yaml, data=data.yaml, hyp=hyp.scratch-high.yaml, epochs=100, batch_size=8, imgsz=640, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, noplots=False, evolve=None, bucket=, cache=None, image_weights=False, device=0, multi_scale=False, single_cls=False, optimizer=SGD, sync_bn=False, workers=8, project=C:/Mansura/UTI/Version-Final/gelan-c, name=training.2, exist_ok=True, quad=False, cos_lr=False, flat_cos_lr=False, fixed_lr=False, label_smoothing=0.0, patience=100, freeze=[0], save_period=-1, seed=0, local_rank=-1, min_items=0, close_mosaic=0, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+YOLO  v0.1-104-g5b1ea9a Python-3.11.5 torch-2.2.0+cu118 CUDA:0 (NVIDIA GeForce RTX 3090, 24576MiB)
+
+hyperparameters: lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, cls_pw=1.0, obj=0.7, obj_pw=1.0, dfl=1.5, iou_t=0.2, anchor_t=5.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.9, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.15, copy_paste=0.3
+ClearML: run 'pip install clearml' to automatically track, visualize and remotely train YOLO  in ClearML
+Comet: run 'pip install comet_ml' to automatically track and visualize YOLO  runs in Comet
+TensorBoard: Start with 'tensorboard --logdir C:\Mansura\UTI\Version-Final\gelan-c', view at http://localhost:6006/
+Overriding model.yaml nc=80 with nc=7
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      1856  models.common.Conv                      [3, 64, 3, 2]                 
+  1                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  2                -1  1    212864  models.common.RepNCSPELAN4              [128, 256, 128, 64, 1]        
+  3                -1  1    164352  models.common.ADown                     [256, 256]                    
+  4                -1  1    847616  models.common.RepNCSPELAN4              [256, 512, 256, 128, 1]       
+  5                -1  1    656384  models.common.ADown                     [512, 512]                    
+  6                -1  1   2857472  models.common.RepNCSPELAN4              [512, 512, 512, 256, 1]       
+  7                -1  1    656384  models.common.ADown                     [512, 512]                    
+  8                -1  1   2857472  models.common.RepNCSPELAN4              [512, 512, 512, 256, 1]       
+  9                -1  1    656896  models.common.SPPELAN                   [512, 512, 256]               
+ 10                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 11           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 12                -1  1   3119616  models.common.RepNCSPELAN4              [1024, 512, 512, 256, 1]      
+ 13                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 14           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 15                -1  1    912640  models.common.RepNCSPELAN4              [1024, 256, 256, 128, 1]      
+ 16                -1  1    164352  models.common.ADown                     [256, 256]                    
+ 17          [-1, 12]  1         0  models.common.Concat                    [1]                           
+ 18                -1  1   2988544  models.common.RepNCSPELAN4              [768, 512, 512, 256, 1]       
+ 19                -1  1    656384  models.common.ADown                     [512, 512]                    
+ 20           [-1, 9]  1         0  models.common.Concat                    [1]                           
+ 21                -1  1   3119616  models.common.RepNCSPELAN4              [1024, 512, 512, 256, 1]      
+ 22      [15, 18, 21]  1   5496037  models.yolo.DDetect                     [7, [256, 512, 512]]          
+gelan-c summary: 621 layers, 25442469 parameters, 25442453 gradients, 103.2 GFLOPs
+
+Transferred 931/937 items from gelan-c.pt
+AMP: checks passed 
+optimizer: SGD(lr=0.01) with parameter groups 154 weight(decay=0.0), 161 weight(decay=0.0005), 160 bias
+albumentations: Blur(p=0.01, blur_limit=(3, 7)), MedianBlur(p=0.01, blur_limit=(3, 7)), ToGray(p=0.01), CLAHE(p=0.01, clip_limit=(1, 4.0), tile_grid_size=(8, 8))
+train: Scanning C:\Mansura\UTI\data\DATA-UTI-LR\Data\train\labels... 4256 images, 0 backgrounds, 0 corrupt: 100%|██████████| 4256/4256 00:06
+train: WARNING  Cache directory C:\Mansura\UTI\data\DATA-UTI-LR\Data\train is not writeable: [WinError 183] Cannot create a file when that file already exists: 'C:\\Mansura\\UTI\\data\\DATA-UTI-LR\\Data\\train\\labels.cache.npy' -> 'C:\\Mansura\\UTI\\data\\DATA-UTI-LR\\Data\\train\\labels.cache'
+val: Scanning C:\Mansura\UTI\data\DATA-UTI-LR\Data\val\labels... 268 images, 0 backgrounds, 0 corrupt: 100%|██████████| 268/268 00:06
+val: WARNING  Cache directory C:\Mansura\UTI\data\DATA-UTI-LR\Data\val is not writeable: [WinError 183] Cannot create a file when that file already exists: 'C:\\Mansura\\UTI\\data\\DATA-UTI-LR\\Data\\val\\labels.cache.npy' -> 'C:\\Mansura\\UTI\\data\\DATA-UTI-LR\\Data\\val\\labels.cache'
+Plotting labels to C:\Mansura\UTI\Version-Final\gelan-c\training.2\labels.jpg... 
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to C:\Mansura\UTI\Version-Final\gelan-c\training.2
+Starting training for 100 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       0/99      5.78G      1.908      4.351      1.454        110        640:   0%|          | 0/532 00:01Exception in thread Thread-15 (plot_images):
+Traceback (most recent call last):
+  File "c:\Users\User\anaconda3\Lib\threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "c:\Users\User\anaconda3\Lib\threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Mansura\UTI\yolov9\utils\plots.py", line 300, in plot_images
+    annotator.box_label(box, label, color=color)
+  File "C:\Mansura\UTI\yolov9\utils\plots.py", line 86, in box_label
+    w, h = self.font.getsize(label)  # text width, height
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'FreeTypeFont' object has no attribute 'getsize'
+       0/99      5.82G      2.083      4.932      1.353        158        640:   0%|          | 2/532 00:05Exception in thread Thread-16 (plot_images):
+Traceback (most recent call last):
+  File "c:\Users\User\anaconda3\Lib\threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "c:\Users\User\anaconda3\Lib\threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Mansura\UTI\yolov9\utils\plots.py", line 300, in plot_images
+    annotator.box_label(box, label, color=color)
+  File "C:\Mansura\UTI\yolov9\utils\plots.py", line 86, in box_label
+    w, h = self.font.getsize(label)  # text width, height
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'FreeTypeFont' object has no attribute 'getsize'
+       0/99      5.82G      2.083      4.952      1.307        142        640:   1%|          | 3/532 00:05Exception in thread Thread-17 (plot_images):
+Traceback (most recent call last):
+  File "c:\Users\User\anaconda3\Lib\threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "c:\Users\User\anaconda3\Lib\threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Mansura\UTI\yolov9\utils\plots.py", line 300, in plot_images
+    annotator.box_label(box, label, color=color)
+  File "C:\Mansura\UTI\yolov9\utils\plots.py", line 86, in box_label
+    w, h = self.font.getsize(label)  # text width, height
+           ^^^^^^^^^^^^^^^^^
+AttributeError: 'FreeTypeFont' object has no attribute 'getsize'
+       0/99      17.1G      1.518      1.818      1.135         67        640: 100%|██████████| 532/532 01:31
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.664      0.616      0.627       0.36
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       1/99      17.2G      1.473      1.192      1.104         20        640: 100%|██████████| 532/532 01:23
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692       0.78      0.737      0.796      0.467
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       2/99      21.7G      1.523      1.244      1.134        104        640: 100%|██████████| 532/532 01:21
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.687      0.566      0.641      0.335
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       3/99      21.7G      1.562      1.286      1.144         34        640: 100%|██████████| 532/532 01:21
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.664       0.66      0.681      0.387
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       4/99      21.7G      1.543      1.233      1.138         59        640: 100%|██████████| 532/532 01:21
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.592      0.334      0.388       0.22
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       5/99      21.7G      1.534      1.198      1.137         92        640: 100%|██████████| 532/532 01:21
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.742      0.728      0.786      0.446
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       6/99      21.7G      1.511      1.155      1.129        141        640: 100%|██████████| 532/532 01:21
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.722      0.603       0.69      0.385
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       7/99      21.7G      1.509      1.098      1.131        218        640: 100%|██████████| 532/532 01:21
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 17/17 00:02
+                   all        268       1692      0.484      0.532      0.478      0.262
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       8/99      21.7G      1.483      1.088       1.12        113        640:  52%|█████▏    | 275/532 00:42
